@@ -14,8 +14,8 @@ export class GameManager extends Component {
     @property(Prefab) symbolPrefab: Prefab = null;
 
     public static Instance: GameManager = null;
-    private columns: number = 5;
-    private rows: number = 4;
+    public columns: number = 5;
+    public rows: number = 4;
     private _result: SymbolType[][];
 
     onLoad() {

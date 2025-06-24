@@ -17,12 +17,13 @@ export class Reel extends Component {
     private static maxItem: number = 10;
     private static slotItemHeight = 110; // include spacing
     private static loopSpinTime = 3;
-    private static speed = 1500;
+    private static speed = 2000;
 
     private endLoopTimestamp: number = 0;
     private state: ReelState = ReelState.Idle;
     private delay: number = 1;
     private columnIndex: number = 0;
+    private needRerender: boolean = false;
 
     get IsLastColumn() {
         return this.columnIndex == 4;
@@ -40,9 +41,10 @@ export class Reel extends Component {
 
     start() {
         this.initItems();
+        this.setRenderItems();
     }
 
-    update(dt) {
+    update(dt: number) {
         if (this.state == ReelState.LoopSpin) {
             let position = this.node.position.clone();
             position.y -= Reel.speed * dt;
@@ -51,6 +53,11 @@ export class Reel extends Component {
 
             if (position.y <= maxPosY) {
                 position.y -= maxPosY;
+
+                if (this.needRerender) {
+                    this.needRerender = false;
+                    this.setRenderItems();
+                }
 
                 if (Date.now() > this.endLoopTimestamp) {
                     this.showResult();
@@ -68,14 +75,21 @@ export class Reel extends Component {
 
     initItems() {
         var itemPrefab = GameManager.Instance.getPrefabSlotItem();
-        var slotData = DataManager.Instance.slots;
 
         for (let i = 0; i < Reel.maxItem; i++) {
             let gameObject = instantiate(itemPrefab);
             gameObject.parent = this.node;
+        }
+    }
 
+    setRenderItems() {
+        var slotData = DataManager.Instance.slots;
+
+        for (let i = 0; i < Reel.maxItem; i++) {
             let typeIndex = i % slotData.length;
-            gameObject.getComponent(SlotItem).Init(slotData[typeIndex].itemType);
+            let slotItem = this.node.children[i].getComponent(SlotItem);
+
+            slotItem.Init(slotData[typeIndex].itemType);
         }
     }
 
@@ -86,6 +100,7 @@ export class Reel extends Component {
 
         this.endLoopTimestamp = Date.now() + Reel.loopSpinTime * 1000;
         this.state = ReelState.LoopSpin;
+        this.needRerender = true;
     }
 
     public showResult() {

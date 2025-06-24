@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Scene",
-    "_name": "scene",
+    "_name": "724",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -61,7 +61,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "AssetManager",
+    "_name": "DataManager",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -664,7 +664,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 477.5,
-      "y": 150,
+      "y": 145,
       "z": 0
     },
     "_lrot": {
