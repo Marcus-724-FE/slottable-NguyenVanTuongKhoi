@@ -2,6 +2,11 @@ import { _decorator, SpriteFrame, Enum } from 'cc';
 
 const { ccclass, property } = _decorator;
 
+export interface IResult {
+    Symbols: number[][], // 5x4 Symbols 
+    Paylines: number[][], // list of index
+}
+
 export enum SymbolType {
     Symbol_J,
     Symbol_Q,

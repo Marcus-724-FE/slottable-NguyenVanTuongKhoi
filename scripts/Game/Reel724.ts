@@ -39,11 +39,6 @@ export class Reel extends Component {
         });
     }
 
-    start() {
-        this.initItems();
-        this.setRenderItems();
-    }
-
     update(dt: number) {
         if (this.state == ReelState.LoopSpin) {
             let position = this.node.position.clone();
@@ -71,6 +66,9 @@ export class Reel extends Component {
     setValue(delay: number, index: number) {
         this.delay = delay;
         this.columnIndex = index;
+
+        this.initItems();
+        this.setRenderItems();
     }
 
     initItems() {
@@ -79,6 +77,7 @@ export class Reel extends Component {
         for (let i = 0; i < Reel.maxItem; i++) {
             let gameObject = instantiate(itemPrefab);
             gameObject.parent = this.node;
+            gameObject.getComponent(SlotItem).Init(this.columnIndex, i);
         }
     }
 
@@ -89,14 +88,14 @@ export class Reel extends Component {
             let typeIndex = i % slotData.length;
             let slotItem = this.node.children[i].getComponent(SlotItem);
 
-            slotItem.Init(slotData[typeIndex].itemType);
+            slotItem.SetRender(slotData[typeIndex].itemType);
         }
     }
 
     public async startSpin() {
         if (this.state != ReelState.Idle) return;
 
-        await new Promise(res => this.schedule(res, this.delay))
+        await new Promise(res => this.scheduleOnce(res, this.delay))
 
         this.endLoopTimestamp = Date.now() + Reel.loopSpinTime * 1000;
         this.state = ReelState.LoopSpin;
@@ -112,7 +111,7 @@ export class Reel extends Component {
 
         for (let i = 0; i < result.length; i++) {
             let slotItem = this.node.children[i].getComponent(SlotItem)
-            slotItem.Init(result[i]);
+            slotItem.SetRender(result[i]);
         }
 
         var position = this.node.position.clone();
