@@ -1,8 +1,8 @@
 import { _decorator, Node, Component, Prefab, instantiate } from "cc";
-import { SymbolType } from "../Core/Interface";
-import { DataManager } from "../Core/DataManager";
-import { EventManager, EventType } from "../Core/EventManaget";
-import { Reel } from "./Reel";
+import { SymbolType } from "../Core/Interface724";
+import { DataManager } from "../Core/DataManager724";
+import { EventManager, EventType } from "../Core/EventManaget724";
+import { Reel } from "./Reel724";
 
 const { ccclass, property } = _decorator;
 

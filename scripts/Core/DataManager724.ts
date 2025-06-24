@@ -1,5 +1,5 @@
 import { _decorator, Component } from 'cc';
-import { SymbolType, SlotData } from './Interface';
+import { SymbolType, SlotData } from './Interface724';
 
 const { ccclass, property } = _decorator;
 

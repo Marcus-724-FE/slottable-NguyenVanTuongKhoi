@@ -1,6 +1,6 @@
 import { _decorator, Component, Node, Sprite } from 'cc';
-import { SymbolType } from '../Core/Interface';
-import { DataManager } from '../Core/DataManager';
+import { SymbolType } from '../Core/Interface724';
+import { DataManager } from '../Core/DataManager724';
 
 const { ccclass, property } = _decorator;
 

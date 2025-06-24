@@ -1,8 +1,8 @@
 import { _decorator, Component, instantiate, tween } from 'cc';
-import { GameManager } from './GameManager';
-import { SlotItem } from './SlotItem';
-import { EventManager, EventType } from '../Core/EventManaget';
-import { DataManager } from '../Core/DataManager';
+import { GameManager } from './GameManager724';
+import { SlotItem } from './SlotItem724';
+import { EventManager, EventType } from '../Core/EventManaget724';
+import { DataManager } from '../Core/DataManager724';
 
 const { ccclass, property } = _decorator;
 
